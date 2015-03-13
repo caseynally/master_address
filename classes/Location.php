@@ -91,6 +91,16 @@ class Location
 	}
 
 	/**
+	 * @return PlaceList
+	 */
+	public function getPlaces()
+	{
+        if ($this->location_id) {
+            return new PlaceList(['address_location_id'=>$this->location_id]);
+        }
+	}
+
+	/**
 	 * Assigns an address.  Creates a new Location_ID if we don't have one yet
 	 *
 	 * @param Address|Subunit $address

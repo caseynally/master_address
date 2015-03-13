@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright 2009 City of Bloomington, Indiana
+ * @copyright 2009-2015 City of Bloomington, Indiana
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.txt
  * @author Cliff Ingham <inghamn@bloomington.in.gov>
  * @param Address $this->address
@@ -29,8 +29,17 @@ foreach ($this->address->getLocations() as $i=>$location) {
 		</div>
 		";
 	}
+	$places = '';
+	$p = $location->getPlaces();
+	if ($p) {
+        foreach ($p as $place) {
+            $name = View::escape($place->getShort_name());
+            $places.= "<h4><a href=\"{$place->getUrl()}\"> $name</a></h4>";
+        }
+	}
 	$content = "
 	<div id=\"location_{$location->getId()}\">
+        $places
 		<h4>Location Addresses</h4>
 		<p><label>Location Status</label> <span>{$location->getStatus()}</span></p>
 		$buttons
