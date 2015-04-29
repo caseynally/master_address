@@ -5,7 +5,7 @@
  * @author Cliff Ingham <inghamn@bloomington.in.gov>
  */
 $places = new PlaceList();
-$places->find();
+$places->find($_GET);
 
 $template = new Template();
 $template->blocks[] = new Block('places/list.inc', ['places'=>$places]);

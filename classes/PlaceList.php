@@ -42,13 +42,20 @@ class PlaceList extends ZendDbResultIterator
      * @param int $limit
      * @param string|array $groupBy Multi-column group by should be given as an array
      */
-    public function find($fields=null, $order='place_name', $limit=null, $groupBy=null)
+    public function find($fields=null, $order='p.place_name', $limit=null, $groupBy=null)
     {
-        $this->select->from('gis.places');
+        $this->select->distinct()->from(['p'=>'gis.places']);
+
+        if (!isset($_SESSION['USER'])) {
+            $this->select->join(['i'=>'gis.place_point_of_interest'], 'p.id=i.place_id', []);
+            $this->select->where('i.publish_flag=?', 'Y');
+        }
 
         if (count($fields)) {
             foreach ($fields as $key=>$value) {
-                $this->select->where("$key=?", $value);
+                if ($value) {
+                    $this->select->where("p.$key=?", $value);
+                }
             }
         }
 

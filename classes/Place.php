@@ -138,4 +138,26 @@ class Place
             return $addresses[0];
         }
     }
+
+    /**
+     * @return array
+     */
+    public static function getUse_types()
+    {
+        $zend_db = Database::getConnection();
+        $sql = "select use_type from gis.place_use_types order by use_type";
+        $result = $zend_db->fetchCol($sql);
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        $zend_db = Database::getConnection();
+        $sql = "select distinct status from gis.places order by status";
+        $result = $zend_db->fetchCol($sql);
+        return $result;
+    }
 }

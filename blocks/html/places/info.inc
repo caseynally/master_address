@@ -5,11 +5,15 @@
  * @author Cliff Ingham <inghamn@bloomington.in.gov>
  * @param Place $this->place
  */
-$address = $this->place->getAddress();
 ?>
 <div class="interfaceBox placeInfo">
     <h2><?php echo View::escape($this->place->getPlace_name()); ?></h2>
-    <h3><?php echo "<a href=\"{$address->getUrl()}\">".View::escape($address)."</a>"; ?></h3>
+    <?php
+        $address = $this->place->getAddress();
+        if ($address) {
+            echo "<h3><a href=\"{$address->getUrl()}\">$address</a></h3>";
+        }
+    ?>
     <table>
     <?php
         foreach (Place::$fields as $f) {
