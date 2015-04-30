@@ -53,7 +53,7 @@ class PlaceList extends ZendDbResultIterator
 
         if (count($fields)) {
             foreach ($fields as $key=>$value) {
-                if ($value) {
+                if (in_array($key, Place::$fields) && $value) {
                     $this->select->where("p.$key=?", $value);
                 }
             }

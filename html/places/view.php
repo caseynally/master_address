@@ -13,6 +13,9 @@ catch (\Exception $e) {
     header('Location: '.BASE_URL.'/places');
 }
 
-$template = new Template();
+$template = (isset($_GET['format']) && $_GET['format']=='json')
+    ? new Template('default', $_GET['format'])
+    : new Template('two-column');
+    
 $template->blocks[] = new Block('places/info.inc', ['place'=>$place]);
 echo $template->render();
