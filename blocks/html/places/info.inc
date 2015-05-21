@@ -16,7 +16,7 @@
     ?>
     <table>
     <?php
-        foreach (Place::$fields as $f) {
+        foreach (PlaceGateway::$fields as $f) {
             $get = 'get'.ucfirst($f);
             $$f = View::escape($this->place->$get());
             echo "<tr><th>$f</th><td>{$$f}</td></tr>";

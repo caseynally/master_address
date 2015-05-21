@@ -6,12 +6,10 @@
  * @param PlaceList $this->places
  */
 $places = [];
+$block = new Block('places/info.inc');
+
 foreach ($this->places as $place) {
-    $p = [];
-    foreach (Place::$fields as $f) {
-        $get = 'get'.ucfirst($f);
-        $p[$f] = $place->$get();
-    }
-    $places[] = $p;
+    $block->place = $place;
+    $places[] = $block->render('json');
 }
-echo json_encode($places, JSON_PRETTY_PRINT);
+echo '['.implode(',', $places).']';

@@ -9,7 +9,7 @@
     <h1>Use Types</h1>
     <ul>
     <?php
-        foreach (Place::getUse_types() as $type) {
+        foreach (PlaceGateway::getUse_types() as $type) {
             echo "<li>$type</li>";
         }
     ?>

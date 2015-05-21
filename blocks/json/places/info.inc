@@ -6,7 +6,7 @@
  * @param Place $this->place
  */
 $place = [];
-foreach (Place::$fields as $f) {
+foreach (PlaceGateway::$fields as $f) {
     $get = 'get'.ucfirst($f);
     $place[$f] = $this->place->$get();
 }

@@ -14,7 +14,7 @@
                 <tr><td><label for="use_type">Use Type</label></td>
                     <td><select name="use_type" id="use_type"><option value=""></option>
                         <?php
-                            foreach (Place::getUse_types() as $type) {
+                            foreach (PlaceGateway::getUse_types() as $type) {
                                 $selected = (!empty($_GET['use_type']) && $type == $_GET['use_type'])
                                     ? 'selected="selected"'
                                     : '';
@@ -28,7 +28,7 @@
                 <tr><td><label for="status">Status</label></td>
                     <td><select name="status" id="status"><option value=""></option>
                         <?php
-                            foreach (Place::getStatuses() as $status) {
+                            foreach (PlaceGateway::getStatuses() as $status) {
                                 $selected = (!empty($_GET['status']) && $status == $_GET['status'])
                                     ? 'selected="selected"'
                                     : '';
