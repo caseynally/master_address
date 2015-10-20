@@ -18,8 +18,7 @@ class PlaceGateway
                 join eng.mast_address            a on l.street_address_id=a.street_address_id
                 join eng.mast_street             s on a.street_id=s.street_id
                 join eng.mast_street_names       n on s.street_id=n.street_id
-                where i.publish_flag = 'Y'
-                    and l.subunit_id is null
+                where l.subunit_id is null
                     and l.active='Y'
                     and n.street_name_type='STREET'";
 
@@ -60,8 +59,7 @@ class PlaceGateway
 
         $params = [];
         if (!isset($_SESSION['USER'])) {
-            $sql.= ' and i.publish_flag=?';
-            $params[] = 'Y';
+            $sql.= " and p.publish_flag='Y'";
         }
 
         if (count($fields)) {
@@ -75,6 +73,7 @@ class PlaceGateway
 
         $sql.= " order by $order";
         $zend_db = Database::getConnection();
+        echo "$sql\n";
         $result = $zend_db->fetchAll($sql, $params);
         $out = [];
         foreach ($result as $row) {
